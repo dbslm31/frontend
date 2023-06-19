@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+
+//React-icons
+import { TbRosetteNumber1 } from "react-icons/tb";
+import { TbRosetteNumber2 } from "react-icons/tb";
+import { TbRosetteNumber3 } from "react-icons/tb";
+
+//Components
+import SearchBar from "./components/SearchBar";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <main className="main">
+      <h1>EAT-SY</h1>
+      <p>Vos repas de la semaine en 1 click</p>
+      <div className="steps">
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          <TbRosetteNumber1 />
+        </p>
+        <p>
+          <TbRosetteNumber2 />
+        </p>
+        <p>
+          <TbRosetteNumber3 />
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <SearchBar />
+    </main>
+  );
 }
 
-export default App
+export default App;
