@@ -10,6 +10,7 @@ const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+  //Submit Event
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -23,22 +24,35 @@ const SearchBar = () => {
     }
   };
 
+  //Add Recipe to Menu table in DB
+  const addToMenu = async (recipeId, recipeUrl) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5001/recipes/${recipeId}`,
+        { recipeUrl }
+      );
+      console.log("Recipe added to menu:", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          className="search-input"
-          placeholder="Type an ingredient"
           type="text"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
         <button type="submit">Search</button>
       </form>
-      <div>
-        Here are your results for{" "}
-        <span style={{ color: "#59a951" }}>"{query}"</span>
-      </div>
+      {searchResults.length > 0 && (
+        <div>
+          Here are your results for{" "}
+          <span style={{ color: "#59a951" }}>"{query}"</span>
+        </div>
+      )}
       <div>
         {searchResults.map((result) => (
           <div key={result.id} className="recipe-card">
@@ -48,7 +62,11 @@ const SearchBar = () => {
               <Link className="link" to={`/recipe/${result.id}`}>
                 <AiOutlineRead /> See recipe
               </Link>
-              <Link className="link" to={`/recipe/${result.id}`}>
+              <Link
+                className="link"
+                onClick={() => addToMenu(result.id, result.url)}
+                to={`/recipe/${result.id}`}
+              >
                 <BsBookmarkPlus /> Add to my menu
               </Link>
             </p>
