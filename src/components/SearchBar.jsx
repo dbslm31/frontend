@@ -8,7 +8,7 @@ const SearchBar = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.get("http://localhost:5000/recipes/all", {
+      const response = await axios.get("http://localhost:5001/recipes/search", {
         query,
       });
       setSearchResults(response.data.results);
@@ -29,10 +29,12 @@ const SearchBar = () => {
       </form>
       <div>
         {searchResults.map((result) => (
-          <div key={result.id}>
-            <img src={result.image} alt={result.title} />
-            <h3>{result.title}</h3>
-          </div>
+          <a href={`http://localhost:5001/recipes/${result.id}`}>
+            <div key={result.id}>
+              <img src={result.image} alt={result.title} />
+              <h3>{result.title}</h3>
+            </div>
+          </a>
         ))}
       </div>
     </div>
