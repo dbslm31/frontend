@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 //image
 import Girl from "../assets/8678774.jpg";
@@ -18,6 +19,9 @@ function HomePage() {
         balanced meals while saving valuable time. Make meal planning a breeze
         with our intuitive app.
       </p>
+      <Link className="link" to={`/menu`}>
+        <button className="menu-btn">See My Menu</button>
+      </Link>
       <HowItWorks />
       <img src={Girl} alt="" className="home-img" />
       <SearchBar />
